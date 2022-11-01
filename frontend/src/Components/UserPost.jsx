@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import React, { useLocation } from 'react-router'
-import eth from '../Assets/eth.jpeg'
+// import eth from '../Assets/eth.jpeg'
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { FiEdit } from 'react-icons/fi';
 import axios from 'axios';
+import { useState } from 'react';
 // this page is for the admin so that he can see his pages only and edit them
 const style = {
   img: 'w-screen h-[500px] p-5 rounded-[32px] object-cover',
@@ -14,11 +15,12 @@ const UserPost = () => {
 
   const location = useLocation();
   const path = location.pathname.split("/")[2];
+  const [post,setPost] = useState({})
 
   useEffect(()=>{
     const getPost = async ()=>{
       const res = await axios.get("/homePosts/" +path);
-      console.log(res)
+      setPost(res.data)
     };
     getPost()
   },[path]);
@@ -27,8 +29,11 @@ const UserPost = () => {
     <div>
       <h1 className='font-semibold text-2xl uppercase text-center pt-5'>add title here</h1>
 
-      <img className={style.img} src={eth} alt="cant load img" />
-
+      {post.photo && (
+      <img className={style.img} 
+      src={post.photo} 
+      alt="cant load img" />
+      )}
       <div className='flex fle-row space-x-5 float-right mr-20'>
         <span className={style.edit}><FiEdit /></span>
         <span className={style.delete}><MdOutlineDeleteForever /></span>

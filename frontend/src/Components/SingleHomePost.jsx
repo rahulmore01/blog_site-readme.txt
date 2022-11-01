@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import eth from '../Assets/eth.jpeg'
+// import eth from '../Assets/eth.jpeg';
 
 const style = {
   // main working css for container
@@ -19,32 +19,25 @@ function SingleHomePost({singleHomePost}) {
   // const PF = "http://localhost:8000/images/"; 
   return (
     <>
-      {/* <img src={eth} alt="image not loaded" /> */}
-
-      {/* flexbox */}
       <div className={style.container}>
-      {/* {singleHomePost.photo && */}
-         {/* <div> */}
-          {/* <img className={style.leftBox} src={PF + singleHomePost.photo} alt="image not loaded" /> } */}
-          <img className={style.leftBox} src={eth} alt="image not loaded" /> 
-          {/* } */}
 
-          {/* <div className={style.text}>
-            {singleHomePost.categories.map((c)=>(
-            <span>{c.name}</span>
-            ))}
-          </div> */}
+      {singleHomePost.photo && (
+          <img className={style.leftBox} src={singleHomePost.photo} alt="image not loaded" /> 
+         )}
+{/* this snippet is to choose categories */}
           <div className={style.text}>
-            <span>Music</span>
+            {singleHomePost.categories.map((c)=>(
+            <span className="style.text" >{c.name}</span>
+            ))}
           </div>
-
-          {/* <Link to={`/singleHomePost/${singleHomePost._id}`}>
-          <h1 className={style.title} >{singleHomePost.title}</h1>
-          </Link> */}
+          {/* <div className={style.text}>
+            <span>Music</span>
+          </div> */}
+{/* when u click on the title of homepage post it will redirect u to single page */}
+          <Link to={`/singleHomePost/${singleHomePost._id}`}>
+          <span className={style.title} >{singleHomePost.title}</span>
+          </Link>
           
-          {/* <Link to={`/singleHomePost/${singleHomePost._id}`}> */}
-          <h1 className={style.title} >{singleHomePost.title}</h1>
-          {/* </Link> */}
           <h3 className={style.time} >{new Date(singleHomePost.createdAt).toDateString()}</h3>
           <span className={style.preview}>
           {singleHomePost.desc}
